@@ -1,0 +1,26 @@
+{
+  "name": "swagger2-to-json",
+  "version": "1.0.2",
+  "description": "Use Swagger v2 JSON Collections to generate sample JSON for requests and responses",
+  "main": "swagger2-to-json.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djfdyuruiry/swagger2-to-json.git"
+  },
+  "keywords": [
+    "swagger",
+    "swagger-ui"
+  ],
+  "author": "djfdyuruiry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/djfdyuruiry/swagger2-to-json/issues"
+  },
+  "homepage": "https://github.com/djfdyuruiry/swagger2-to-json#readme",
+  "dependencies": {
+    "swagger2-to-object": "^1.0.2"
+  }
+}
