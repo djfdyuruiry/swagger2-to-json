@@ -1,6 +1,6 @@
 {
   "name": "swagger2-to-json",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Use Swagger v2 JSON Collections to generate sample JSON for requests and responses",
   "main": "swagger2-to-json.js",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/djfdyuruiry/swagger2-to-json#readme",
   "dependencies": {
+    "sync-request": "^4.1.0",
     "swagger2-to-object": "^1.0.2"
   }
 }
