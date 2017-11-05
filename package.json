@@ -1,6 +1,6 @@
 {
   "name": "swagger2-to-json",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Use Swagger v2 JSON Collections to generate sample JSON for requests and responses",
   "main": "swagger2-to-json.js",
   "scripts": {
