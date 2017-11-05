@@ -1,7 +1,7 @@
 var fs = require("fs")
-var Swagger2Object = require("swagger2-to-object"); 
+var request = require("sync-request")
 
-var convertSwaggerRoot = require("./convertSwaggerRoot.js");
+var Swagger2Object = require("swagger2-to-object"); 
 
 const toJson = (obj, opts) => 
     (opts && opts.prettyPrint) ? JSON.stringify(obj, null, 4) : JSON.stringify(obj)
@@ -29,7 +29,32 @@ function convertSwagger (swaggerSpec, convertSwaggerOptions) {
     }
 }
 
+function convertSwaggerJson (swaggerJson, convertSwagger, options) {
+    console.log(`Parsing Swagger spec JSON...`);
+
+    var swaggerSpec = JSON.parse(swaggerJson);
+    return convertSwagger(swaggerSpec, options);
+}
+
 /* module export */
 module.exports = {
-    convertSwagger: () => convertSwaggerRoot(convertSwagger)
+    convertSwagger: () => ({ 
+        fromUrl: (url, options) => {
+            console.log(`Reading Swagger spec from URL: ${url}...`);
+
+            var response = request("GET", url);
+            var swaggerJson = response.getBody();
+
+            return convertSwaggerJson(swaggerJson, convertSwagger, options);
+        },
+        fromFile: (filePath, options) => {
+            console.log(`Reading Swagger spec from file: ${filePath}...`);
+
+            var swaggerJson = fs.readFileSync(filePath);
+
+            return convertSwaggerJson(swaggerJson, convertSwagger, options);
+        },
+        fromJson: (swaggerSpecJson, options) => convertSwaggerJson(swaggerJson, convertSwagger, options),
+        fromSpec: (swaggerSpec, options) => convertSwagger(swaggerSpec, options)
+    })
 };
