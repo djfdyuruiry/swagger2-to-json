@@ -30,7 +30,9 @@ function convertSwagger (swaggerSpec, convertSwaggerOptions) {
 }
 
 function convertSwaggerJson (swaggerJson, convertSwagger, options) {
-    console.log(`Parsing Swagger spec JSON...`);
+    if (options && options.debug) {
+        console.log(`Parsing Swagger spec JSON...`);
+    }
 
     var swaggerSpec = JSON.parse(swaggerJson);
     return convertSwagger(swaggerSpec, options);
@@ -40,7 +42,9 @@ function convertSwaggerJson (swaggerJson, convertSwagger, options) {
 module.exports = {
     convertSwagger: () => ({ 
         fromUrl: (url, options) => {
-            console.log(`Reading Swagger spec from URL: ${url}...`);
+            if (options && options.debug) {
+                console.log(`Reading Swagger spec from URL: ${url}...`);
+            }
 
             var response = request("GET", url);
             var swaggerJson = response.getBody();
@@ -48,8 +52,10 @@ module.exports = {
             return convertSwaggerJson(swaggerJson, convertSwagger, options);
         },
         fromFile: (filePath, options) => {
-            console.log(`Reading Swagger spec from file: ${filePath}...`);
-
+            if (options && options.debug) {
+                console.log(`Reading Swagger spec from file: ${filePath}...`);
+            }
+            
             var swaggerJson = fs.readFileSync(filePath);
 
             return convertSwaggerJson(swaggerJson, convertSwagger, options);
