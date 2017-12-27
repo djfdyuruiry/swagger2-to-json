@@ -9,9 +9,9 @@ const toJson = (obj, opts) =>
 /* module function chain */
 function convertSwagger (swaggerSpec, convertSwaggerOptions) {
     var objGenerator = Swagger2Object.generateObjects().for();
-    var requestsAndResponsesJson = () => toJson(objGenerator.specSchemas(swaggerSpec));
-    var requestsJson = () => toJson(objGenerator.specRequests(swaggerSpec));
-    var responsesJson = () => toJson(objGenerator.specResponses(swaggerSpec));
+    var requestsAndResponsesJson = () => toJson(objGenerator.specSchemas(swaggerSpec, convertSwaggerOptions));
+    var requestsJson = () => toJson(objGenerator.specRequests(swaggerSpec, convertSwaggerOptions));
+    var responsesJson = () => toJson(objGenerator.specResponses(swaggerSpec, convertSwaggerOptions));
 
     return { 
         requestsAndResponses: () => ({
