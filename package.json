@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/djfdyuruiry/swagger2-to-json#readme",
   "dependencies": {
-    "sync-request": "^6.1.0",
-    "swagger2-to-object": "^1.0.9"
+    "swagger2-to-object": "^1.0.9",
+    "sync-request": "^6.1.0"
   }
 }
