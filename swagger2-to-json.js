@@ -9,22 +9,25 @@ const toJson = (obj, opts) =>
 /* module function chain */
 function convertSwagger (swaggerSpec, convertSwaggerOptions) {
     var objGenerator = Swagger2Object.generateObjects().for();
-    var requestsAndResponsesJson = () => toJson(objGenerator.specSchemas(swaggerSpec, convertSwaggerOptions));
-    var requestsJson = () => toJson(objGenerator.specRequests(swaggerSpec, convertSwaggerOptions));
-    var responsesJson = () => toJson(objGenerator.specResponses(swaggerSpec, convertSwaggerOptions));
+    var requestsAndResponses = () => objGenerator.specSchemas(swaggerSpec, convertSwaggerOptions);
+    var requests = () => objGenerator.specRequests(swaggerSpec, convertSwaggerOptions);
+    var responses = () => objGenerator.specResponses(swaggerSpec, convertSwaggerOptions);
 
     return { 
         requestsAndResponses: () => ({
-            toJson: (options) => requestsAndResponsesJson(),
-            toJsonFile: (filename, options) => fs.writeFileSync(filename, requestsAndResponsesJson())
+            toMap: () => requestsAndResponses(),
+            toJson: () => toJson(requestsAndResponses()),
+            toJsonFile: filename => fs.writeFileSync(filename, toJson(requestsAndResponses()))
         }),
         requests: () => ({
-            toJson: (options) => requestsJson(),
-            toJsonFile: (filename, options) => fs.writeFileSync(filename, requestsJson())
+            toMap: () => requests(),
+            toJson: () => toJson(requests()),
+            toJsonFile: filename => fs.writeFileSync(filename, toJson(requests()))
         }),
         responses:  () => ({
-            toJson: (options) => responsesJson(),
-            toJsonFile: (filename, options) => fs.writeFileSync(filename, responsesJson())
+            toMap: () => responses(),
+            toJson: () => toJson(responses()),
+            toJsonFile: filename => fs.writeFileSync(filename, toJson(responses()))
         }),
     }
 }
